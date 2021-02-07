@@ -41,7 +41,7 @@ namespace FoodForYou.Core.Application.Implementations.Order
 
         public async Task<OrderDetails> GetId(int id, CancellationToken cancellationToken = default)
         {
-            if (id == null)
+            if (id == default)
             {
                 throw new ArgumentException("Invalid Order Identifier", nameof(id));
             }

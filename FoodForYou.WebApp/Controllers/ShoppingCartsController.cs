@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Net.Http;
 using System.Threading.Tasks;
 using FoodForYou.Core.Application.ServiceContracts;
-using FoodForYou.Core.Models.Products;
 using FoodForYou.Core.Models.Relational;
 using FoodForYou.Core.Models.Users;
 using Microsoft.AspNetCore.Http;
@@ -41,7 +38,7 @@ namespace FoodForYou.WebApp.Controllers
             if (shoppingCart != null)
             {
                 var addedProduct = await _productService.GetId(id);
-                await _shoppingService.AddProduct(await GetUserFromContext(HttpContext), addedProduct);
+                _shoppingService.AddProduct(await GetUserFromContext(HttpContext), addedProduct);
                 return View("Index", shoppingCart);
             }
             
@@ -54,7 +51,7 @@ namespace FoodForYou.WebApp.Controllers
             if (shoppingCart != null)
             {
                 var removedProduct = await _productService.GetId(id);
-                await _shoppingService.RemoveProduct(await GetUserFromContext(HttpContext), removedProduct);
+                _shoppingService.RemoveProduct(await GetUserFromContext(HttpContext), removedProduct);
                 return View("Index", shoppingCart);
             }
             
@@ -69,7 +66,7 @@ namespace FoodForYou.WebApp.Controllers
             if (shoppingCart != null)
             {
                 var cartProduct = await _productService.GetId(orderProduct.Product.ProductId);
-                await _shoppingService.EditProductQuantity(await GetUserFromContext(HttpContext), cartProduct, orderProduct.Quantity);
+                _shoppingService.EditProductQuantity(await GetUserFromContext(HttpContext), cartProduct, orderProduct.Quantity);
                 return View("Index", shoppingCart);
             }
             
@@ -79,7 +76,7 @@ namespace FoodForYou.WebApp.Controllers
         private async Task<CostumerCart> GetCartFromContext(HttpContext context)
         {
             var user = await GetUserFromContext(context);
-            var shoppingCart = await _shoppingService.Get(user) ?? await _shoppingService.Create(user, new CostumerCart(user));
+            var shoppingCart = _shoppingService.Get(user) ?? _shoppingService.Create(user, new CostumerCart(user));
             return shoppingCart;
         }
         
