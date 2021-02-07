@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>FoodForYou.Core.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FoodForYou.Core.Models\FoodForYou.Core.Models.csproj" />
+      <ProjectReference Include="..\FoodForYou.Persistence.EntityFramework\FoodForYou.Persistence.EntityFramework.csproj" />
+    </ItemGroup>
+
+</Project>

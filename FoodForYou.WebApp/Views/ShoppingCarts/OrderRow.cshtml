@@ -1,0 +1,20 @@
+﻿@model FoodForYou.Core.Models.Relational.OrderProduct
+
+<form asp-action="ChangeQuantity">
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Product.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Quantity) |
+            <a asp-action="AddProduct" asp-controller="ShoppingCarts" asp-route-id="@Model.Product.ProductId">Add</a> |
+            <a asp-action="RemoveProduct" asp-controller="ShoppingCarts" asp-route-id="@Model.Product.ProductId">Remove</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PriceForOrderedQuantity)
+        </td>
+    </tr>
+</form>

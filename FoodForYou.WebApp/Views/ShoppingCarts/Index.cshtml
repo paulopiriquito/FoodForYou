@@ -1,0 +1,55 @@
+﻿@model FoodForYou.Core.Models.Relational.CostumerCart
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "_Layout";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Shipper)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Shipper.CompanyName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Products">Back to Catalog</a>
+</div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CartProducts[0].Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartProducts[0].Product.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartProducts[0].Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartProducts[0].PriceForOrderedQuantity)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.CartProducts) {
+        <partial name="OrderRow" model="@item" />
+    }
+    </tbody>
+</table>
