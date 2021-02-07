@@ -24,6 +24,6 @@ namespace FoodForYou.Core.Models.Relational
         
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.00 €}")]
         [DisplayName("Total Price")]
-        public double TotalPrice => CartProducts.Sum(x=> x.PriceForOrderedQuantity);
+        public float TotalPrice => (float) CartProducts.Sum(x=> x.PriceForOrderedQuantity);
     }
 }

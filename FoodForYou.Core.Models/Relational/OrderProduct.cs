@@ -11,6 +11,6 @@ namespace FoodForYou.Core.Models.Relational
         
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.00 €}")]
         [DisplayName("Price for Quantity")]
-        public double PriceForOrderedQuantity => Quantity * Product.UnitPrice;
+        public float PriceForOrderedQuantity => Quantity * Product.UnitPrice;
     }
 }

@@ -12,6 +12,6 @@ namespace FoodForYou.Core.Models.Products
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.00 €}")]
         [DisplayName("Unit Price")]
-        public double UnitPrice { get; set; }
+        public float UnitPrice { get; set; }
     }
 }
