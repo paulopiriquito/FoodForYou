@@ -14,8 +14,6 @@ namespace FoodForYou.Persistence.EntityFramework.Context
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
-        
-        public DbSet<User> Users { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
 

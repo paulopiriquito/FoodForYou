@@ -11,9 +11,9 @@ namespace FoodForYou.Core.Application.Implementations.User
 {
     public class UserService : IUserService
     {
-        protected readonly IStoreDbContext DbContext;
+        protected readonly AuthenticationDbContext DbContext;
 
-        public UserService(IStoreDbContext dbContext)
+        public UserService(AuthenticationDbContext dbContext)
         {
             DbContext = dbContext;
         }

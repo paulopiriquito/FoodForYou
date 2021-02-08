@@ -78,6 +78,20 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Registered = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -138,6 +152,22 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "Address", "BirthDate", "City", "Country", "FullName", "HomePhone", "PostalCode", "Region", "Title", "TitleOfCourtesy" },
+                values: new object[] { 1, "Baker Street 221B", new DateTime(1990, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "London", "United Kingdom", "Scarlet Holmes", "+351 245234234", "432-32335", "West End", "CEO", "Mrs." });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "ProductName", "UnitPrice" },
+                values: new object[,]
+                {
+                    { 1, "Olive Oil", 1.2m },
+                    { 2, "Cookies", 1m },
+                    { 3, "Coke", 2.2m },
+                    { 4, "Apple", 0.15m }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",
                 table: "OrderDetails",
@@ -162,12 +192,25 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                 name: "IX_Orders_ShipperId",
                 table: "Orders",
                 column: "ShipperId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Orders");

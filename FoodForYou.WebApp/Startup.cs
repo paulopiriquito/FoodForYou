@@ -32,7 +32,11 @@ namespace FoodForYou.WebApp
                 options.Cookie.IsEssential = true;
             });
             
-            services.AddApplication(Configuration);
+            services.AddApplication(Configuration, identityOptions =>
+            {
+                identityOptions.SignIn.RequireConfirmedAccount = false;
+            });
+            
             services.AddControllersWithViews();
         }
 
@@ -50,10 +54,13 @@ namespace FoodForYou.WebApp
                 app.UseHsts();
             }
 
-            using var scope = app.ApplicationServices.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<IStoreDbContext>();
-            db.EnsureCreated();
-
+            if (Configuration.GetSection("DbSettings").GetValue<bool>("UseMemory"))
+            {
+                using var scope = app.ApplicationServices.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<IStoreDbContext>();
+                db.EnsureCreated();
+            }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

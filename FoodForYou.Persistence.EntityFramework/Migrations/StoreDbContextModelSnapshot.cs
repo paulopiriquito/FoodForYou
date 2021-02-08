@@ -4,6 +4,7 @@ using FoodForYou.Persistence.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodForYou.Persistence.EntityFramework.Migrations
 {
@@ -97,6 +98,22 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            Address = "Baker Street 221B",
+                            BirthDate = new DateTime(1990, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = "London",
+                            Country = "United Kingdom",
+                            FullName = "Scarlet Holmes",
+                            HomePhone = "+351 245234234",
+                            PostalCode = "432-32335",
+                            Region = "West End",
+                            Title = "CEO",
+                            TitleOfCourtesy = "Mrs."
+                        });
                 });
 
             modelBuilder.Entity("FoodForYou.Persistence.EntityFramework.Entities.Order", b =>
@@ -170,6 +187,32 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductName = "Olive Oil",
+                            UnitPrice = 1.2m
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ProductName = "Cookies",
+                            UnitPrice = 1m
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ProductName = "Coke",
+                            UnitPrice = 2.2m
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            ProductName = "Apple",
+                            UnitPrice = 0.15m
+                        });
                 });
 
             modelBuilder.Entity("FoodForYou.Persistence.EntityFramework.Entities.Shipper", b =>
@@ -185,6 +228,30 @@ namespace FoodForYou.Persistence.EntityFramework.Migrations
                     b.HasKey("ShipperId");
 
                     b.ToTable("Shippers");
+                });
+
+            modelBuilder.Entity("FoodForYou.Persistence.EntityFramework.Entities.User", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Registered")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("Username");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("FoodForYou.Persistence.EntityFramework.Entities.Order", b =>

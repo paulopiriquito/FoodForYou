@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using FoodForYou.Core.Models.Users;
 
 namespace FoodForYou.Core.Application.ServiceContracts
 {

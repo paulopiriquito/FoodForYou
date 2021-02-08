@@ -1,14 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace FoodForYou.Persistence.EntityFramework.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
         public Guid UserId { get; set; }
         
         public string Username { get; set; }
-        public string Email { get; set; }
         public bool Registered { get; set; }
     }
 }
